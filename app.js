@@ -1,7 +1,12 @@
 const grid = document.querySelector(".grid");
 
+const gridHeight = 300;
+const gridWidth = 600;
+
 const blockHeight = 20;
 const blockWidth = 100;
+
+const ballDiameter = 20;
 
 const UserStartPosition = [230, 10];
 let userCurrentPosition = UserStartPosition;
@@ -82,9 +87,18 @@ function moveUser(e) {
 }
 document.addEventListener("keydown", moveUser);
 
-function moveBall() {}
+function moveBall() {
+  ballCurrentPosition[0] += 2;
+  ballCurrentPosition[1] += 2;
+  drawBall();
+}
 
-function checkForCollisions() {}
+timerId = setInterval(moveBall, 100);
+
+function checkForWallCollisions() {
+  if (ballCurrentPosition[0] + ballDiameter === boardHeight) {
+  }
+}
 
 function changeBallDirection() {}
 
