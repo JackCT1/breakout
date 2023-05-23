@@ -96,6 +96,7 @@ function moveBall() {
   drawBall();
   checkForWallCollisions();
   checkForUserBlockCollisions();
+  checkForBlockCollisions();
 }
 
 timerId = setInterval(moveBall, 100);
@@ -112,13 +113,29 @@ function checkForWallCollisions() {
 }
 
 function checkForUserBlockCollisions() {
+  if (
+    ballCurrentPosition[0] > userCurrentPosition[0] &&
+    ballCurrentPosition[0] < userCurrentPosition[0] + blockWidth &&
+    ballCurrentPosition[1] === userCurrentPosition[1] + blockHeight
+  ) {
+    yBallDirection = -yBallDirection;
+  }
+}
+
+const allBlocks = Array.from(document.querySelectorAll("block"));
+
+function checkForBlockCollisions() {
   for (let i = 0; i < blocks.length; i++) {
     if (
-      ballCurrentPosition[0] > userCurrentPosition[0] &&
-      ballCurrentPosition[0] < userCurrentPosition[0] + blockWidth &&
-      ballCurrentPosition[1] === userCurrentPosition[1] + blockHeight
+      ballCurrentPosition[0] > blocks[i].bottomLeft[0] &&
+      ballCurrentPosition[0] < blocks[i].bottomRight[0]
     ) {
-      yBallDirection = -yBallDirection;
+      if (
+        ballCurrentPosition[1] + ballDiameter === blocks[i].bottomLeft[1] ||
+        ballCurrentPosition[1 === blocks[i].bottomLeft[1] + blockHeight]
+      ) {
+        yBallDirection = -yBallDirection;
+      }
     }
   }
 }
