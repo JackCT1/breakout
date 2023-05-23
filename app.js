@@ -4,7 +4,7 @@ const blockHeight = 20;
 const blockWidth = 100;
 
 const UserStartPosition = [230, 10];
-let currentPosition = UserStartPosition;
+let userCurrentPosition = UserStartPosition;
 
 const ballStartPosition = [270, 50];
 let ballCurrentPosition = ballStartPosition;
@@ -59,8 +59,8 @@ grid.appendChild(ball);
 drawBall();
 
 function drawUser() {
-  userBlock.style.left = currentPosition[0] + "px";
-  userBlock.style.bottom = currentPosition[1] + "px";
+  userBlock.style.left = userCurrentPosition[0] + "px";
+  userBlock.style.bottom = userCurrentPosition[1] + "px";
 }
 
 function drawBall() {
@@ -68,7 +68,19 @@ function drawBall() {
   ball.style.bottom = ballCurrentPosition[1] + "px";
 }
 
-function moveUser() {}
+function moveUser(e) {
+  switch (e.key) {
+    case "ArrowLeft":
+      userCurrentPosition[0] -= 10;
+      drawUser();
+      break;
+    case "ArrowRight":
+      userCurrentPosition[0] += 10;
+      drawUser();
+      break;
+  }
+}
+document.addEventListener("keydown", moveUser);
 
 function moveBall() {}
 
