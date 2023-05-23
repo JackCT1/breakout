@@ -14,6 +14,9 @@ let userCurrentPosition = UserStartPosition;
 const ballStartPosition = [270, 50];
 let ballCurrentPosition = ballStartPosition;
 
+let xBallDirection = 5;
+let yBallDirection = 5;
+
 let timerId;
 
 class Block {
@@ -88,15 +91,22 @@ function moveUser(e) {
 document.addEventListener("keydown", moveUser);
 
 function moveBall() {
-  ballCurrentPosition[0] += 2;
-  ballCurrentPosition[1] += 2;
+  ballCurrentPosition[0] += xBallDirection;
+  ballCurrentPosition[1] += yBallDirection;
   drawBall();
+  checkForWallCollisions();
 }
 
 timerId = setInterval(moveBall, 100);
 
 function checkForWallCollisions() {
-  if (ballCurrentPosition[0] + ballDiameter === boardHeight) {
+  if (ballCurrentPosition[1] + ballDiameter === gridHeight) {
+    yBallDirection = -yBallDirection;
+  } else if (
+    ballCurrentPosition[0] + ballDiameter === gridWidth ||
+    ballCurrentPosition[0] === 0
+  ) {
+    xBallDirection = -xBallDirection;
   }
 }
 
