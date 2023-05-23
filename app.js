@@ -8,8 +8,8 @@ const blockWidth = 100;
 
 const ballDiameter = 20;
 
-const UserStartPosition = [230, 10];
-let userCurrentPosition = UserStartPosition;
+const userStartPosition = [230, 10];
+let userCurrentPosition = userStartPosition;
 
 const ballStartPosition = [270, 50];
 let ballCurrentPosition = ballStartPosition;
@@ -95,6 +95,7 @@ function moveBall() {
   ballCurrentPosition[1] += yBallDirection;
   drawBall();
   checkForWallCollisions();
+  checkForUserBlockCollisions();
 }
 
 timerId = setInterval(moveBall, 100);
@@ -107,6 +108,18 @@ function checkForWallCollisions() {
     ballCurrentPosition[0] === 0
   ) {
     xBallDirection = -xBallDirection;
+  }
+}
+
+function checkForUserBlockCollisions() {
+  for (let i = 0; i < blocks.length; i++) {
+    if (
+      ballCurrentPosition[0] > userCurrentPosition[0] &&
+      ballCurrentPosition[0] < userCurrentPosition[0] + blockWidth &&
+      ballCurrentPosition[1] === userCurrentPosition[1] + blockHeight
+    ) {
+      yBallDirection = -yBallDirection;
+    }
   }
 }
 
