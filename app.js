@@ -97,6 +97,11 @@ function moveBall() {
   checkForWallCollisions();
   checkForUserBlockCollisions();
   checkForBlockCollisions();
+  if (ballCurrentPosition[1] <= 0) {
+    clearInterval(timerId);
+    alert("You lose!");
+    document.removeEventListener("keydown", moveUser);
+  }
 }
 
 timerId = setInterval(moveBall, 100);
@@ -136,6 +141,11 @@ function checkForBlockCollisions() {
         yBallDirection = -yBallDirection;
         allBlocks[i].classList.remove("block");
         blocks.splice(i, 1);
+        if (blocks.length == 0) {
+          alert("You Win!");
+          clearInterval(timerId);
+          document.removeEventListener("keydown", moveUser);
+        }
       }
     } else if (
       ballCurrentPosition[1] + 0.5 * ballDiameter > blocks[i].bottomLeft[1] &&
@@ -148,6 +158,11 @@ function checkForBlockCollisions() {
         xBallDirection = -xBallDirection;
         allBlocks[i].classList.remove("block");
         blocks.splice(i, 1);
+        if (blocks.length == 0) {
+          alert("You win!");
+          clearInterval(timerId);
+          document.removeEventListener("keydown", moveUser);
+        }
       }
     }
   }
