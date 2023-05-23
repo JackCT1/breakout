@@ -3,6 +3,14 @@ const grid = document.querySelector(".grid");
 const blockHeight = 20;
 const blockWidth = 100;
 
+const UserStartPosition = [230, 10];
+let currentPosition = UserStartPosition;
+
+const ballStartPosition = [230, 50];
+let ballCurrentPosition = ballStartPosition;
+
+let timerId;
+
 class Block {
   constructor(x, y) {
     (this.bottomLeft = [x, y]),
@@ -40,16 +48,32 @@ function addBlocks() {
   }
 }
 
+const userBlock = document.createElement("div");
+userBlock.classList.add("user");
+grid.appendChild("user");
+drawUser();
+
+const ball = document.createElement("div");
+ball.classList.add("ball");
+grid.appendChild("ball");
+drawBall();
+
 function drawUser() {
-  const userBlock = document.createElement("div");
-  userBlock.classList.add("user");
-  grid.appendChild("user");
+  userBlock.style.left = currentPosition[0];
+  userBlock.style.bottom = currentPosition[1];
 }
 
 function drawBall() {
-  const ball = document.createElement("div");
-  ball.classList.add("ball");
-  grid.appendChild("ball");
+  ball.style.left = ballCurrentPosition[0];
+  ball.style.bottom = ballCurrentPosition[1];
 }
+
+function moveUser() {}
+
+function moveBall() {}
+
+function checkForCollisions() {}
+
+function changeBallDirection() {}
 
 addBlocks();
