@@ -122,19 +122,32 @@ function checkForUserBlockCollisions() {
   }
 }
 
-const allBlocks = Array.from(document.querySelectorAll("block"));
-
 function checkForBlockCollisions() {
   for (let i = 0; i < blocks.length; i++) {
+    const allBlocks = Array.from(document.querySelectorAll(".block"));
     if (
-      ballCurrentPosition[0] > blocks[i].bottomLeft[0] &&
-      ballCurrentPosition[0] < blocks[i].bottomRight[0]
+      ballCurrentPosition[0] + 0.5 * ballDiameter > blocks[i].bottomLeft[0] &&
+      ballCurrentPosition[0] < blocks[i].bottomRight[0] - 0.5 * ballDiameter
     ) {
       if (
         ballCurrentPosition[1] + ballDiameter === blocks[i].bottomLeft[1] ||
-        ballCurrentPosition[1 === blocks[i].bottomLeft[1] + blockHeight]
+        ballCurrentPosition[1] === blocks[i].bottomLeft[1] + blockHeight
       ) {
         yBallDirection = -yBallDirection;
+        allBlocks[i].classList.remove("block");
+        blocks.splice(i, 1);
+      }
+    } else if (
+      ballCurrentPosition[1] + 0.5 * ballDiameter > blocks[i].bottomLeft[1] &&
+      ballCurrentPosition[1] < blocks[i].topLeft[1] - 0.5 * ballDiameter
+    ) {
+      if (
+        ballCurrentPosition[0] + ballDiameter === blocks[i].bottomLeft[0] ||
+        ballCurrentPosition[0] === blocks[i].bottomLeft[0] + blockWidth
+      ) {
+        xBallDirection = -xBallDirection;
+        allBlocks[i].classList.remove("block");
+        blocks.splice(i, 1);
       }
     }
   }
