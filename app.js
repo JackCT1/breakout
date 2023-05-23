@@ -6,7 +6,7 @@ const blockWidth = 100;
 const UserStartPosition = [230, 10];
 let currentPosition = UserStartPosition;
 
-const ballStartPosition = [230, 50];
+const ballStartPosition = [270, 50];
 let ballCurrentPosition = ballStartPosition;
 
 let timerId;
@@ -50,22 +50,22 @@ function addBlocks() {
 
 const userBlock = document.createElement("div");
 userBlock.classList.add("user");
-grid.appendChild("user");
+grid.appendChild(userBlock);
 drawUser();
 
 const ball = document.createElement("div");
 ball.classList.add("ball");
-grid.appendChild("ball");
+grid.appendChild(ball);
 drawBall();
 
 function drawUser() {
-  userBlock.style.left = currentPosition[0];
-  userBlock.style.bottom = currentPosition[1];
+  userBlock.style.left = currentPosition[0] + "px";
+  userBlock.style.bottom = currentPosition[1] + "px";
 }
 
 function drawBall() {
-  ball.style.left = ballCurrentPosition[0];
-  ball.style.bottom = ballCurrentPosition[1];
+  ball.style.left = ballCurrentPosition[0] + "px";
+  ball.style.bottom = ballCurrentPosition[1] + "px";
 }
 
 function moveUser() {}
