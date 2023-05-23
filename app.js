@@ -40,4 +40,16 @@ function addBlocks() {
   }
 }
 
+function drawUser() {
+  const userBlock = document.createElement("div");
+  userBlock.classList.add("user");
+  grid.appendChild("user");
+}
+
+function drawBall() {
+  const ball = document.createElement("div");
+  ball.classList.add("ball");
+  grid.appendChild("ball");
+}
+
 addBlocks();
